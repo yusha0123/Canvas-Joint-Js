@@ -39,6 +39,8 @@
     }
   }
 
+  // Modal
+
   .modal {
     position: fixed;
     top: 50%;
@@ -49,7 +51,7 @@
   .joint-dialog.joint-theme-default {
     .body {
       padding: 0;
-      max-height: 500px;
+      max-height: 450px;
       overflow-y: scroll;
     }
 
@@ -175,12 +177,13 @@
 
     .btn-list-del {
       order: 4;
-      align-self: flex-end;
+      align-self: center;
       margin-top: 8px;
       text-align: center;
       min-width: 82px;
       color: #f6511d;
       border: 1px solid #f6511d;
+      padding: 0 10px;
 
       &:hover {
         color: #f8f8ff;

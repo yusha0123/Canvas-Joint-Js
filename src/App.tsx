@@ -64,71 +64,71 @@ const App = () => {
     canvas.current?.appendChild(scroller.el);
     scroller.render().center();
 
-    // const users = new Table()
-    //   .setName("users")
-    //   .setTabColor("#6495ED")
-    //   .position(170, 220)
-    //   .setColumns([
-    //     { name: "id", type: "int", key: true },
-    //     { name: "full_name", type: "varchar" },
-    //     { name: "created_at", type: "datetime" },
-    //     { name: "country_code", type: "int" },
-    //   ])
-    //   .addTo(graph);
+    const users = new Table()
+      .setName("users")
+      .setTabColor("#6495ED")
+      .position(170, 220)
+      .setColumns([
+        { name: "id", type: "int", key: true },
+        { name: "full_name", type: "varchar" },
+        { name: "created_at", type: "datetime" },
+        { name: "country_code", type: "int" },
+      ])
+      .addTo(graph);
 
-    // const orders = new Table()
-    //   .setName("orders")
-    //   .setTabColor("#008B8B")
-    //   .position(570, 140)
-    //   .setColumns([
-    //     { name: "user_id", type: "int", key: true },
-    //     { name: "status", type: "varchar" },
-    //     { name: "product_id", type: "int" },
-    //     { name: "created_at", type: "datetime" },
-    //   ])
-    //   .addTo(graph);
+    const orders = new Table()
+      .setName("orders")
+      .setTabColor("#008B8B")
+      .position(570, 140)
+      .setColumns([
+        { name: "user_id", type: "int", key: true },
+        { name: "status", type: "varchar" },
+        { name: "product_id", type: "int" },
+        { name: "created_at", type: "datetime" },
+      ])
+      .addTo(graph);
 
-    // const countries = new Table()
-    //   .setName("countries")
-    //   .setTabColor("#CD5C5C")
-    //   .position(170, 540)
-    //   .setColumns([
-    //     { name: "code", type: "int", key: true },
-    //     { name: "name", type: "varchar" },
-    //   ])
-    //   .addTo(graph);
+    const countries = new Table()
+      .setName("countries")
+      .setTabColor("#CD5C5C")
+      .position(170, 540)
+      .setColumns([
+        { name: "code", type: "int", key: true },
+        { name: "name", type: "varchar" },
+      ])
+      .addTo(graph);
 
-    // const products = new Table()
-    //   .setName("products")
-    //   .setTabColor("#FFD700")
-    //   .position(570, 440)
-    //   .setColumns([
-    //     { name: "id", type: "int", key: true },
-    //     { name: "name", type: "varchar" },
-    //     { name: "price", type: "int" },
-    //     { name: "status", type: "varchar" },
-    //     { name: "created_at", type: "datetime" },
-    //   ])
-    //   .addTo(graph);
+    const products = new Table()
+      .setName("products")
+      .setTabColor("#FFD700")
+      .position(570, 440)
+      .setColumns([
+        { name: "id", type: "int", key: true },
+        { name: "name", type: "varchar" },
+        { name: "price", type: "int" },
+        { name: "status", type: "varchar" },
+        { name: "created_at", type: "datetime" },
+      ])
+      .addTo(graph);
 
-    // const links = [
-    //   new Link({
-    //     source: { id: users.id, port: "id" },
-    //     target: { id: orders.id, port: "user_id" },
-    //   }),
-    //   new Link({
-    //     source: { id: users.id, port: "country_code" },
-    //     target: { id: countries.id, port: "code" },
-    //   }),
-    //   new Link({
-    //     source: { id: orders.id, port: "product_id" },
-    //     target: { id: products.id, port: "id" },
-    //   }),
-    // ];
+    const links = [
+      new Link({
+        source: { id: users.id, port: "id" },
+        target: { id: orders.id, port: "user_id" },
+      }),
+      new Link({
+        source: { id: users.id, port: "country_code" },
+        target: { id: countries.id, port: "code" },
+      }),
+      new Link({
+        source: { id: orders.id, port: "product_id" },
+        target: { id: products.id, port: "id" },
+      }),
+    ];
 
-    // links.forEach((link) => {
-    //   link.addTo(graph);
-    // });
+    links.forEach((link) => {
+      link.addTo(graph);
+    });
 
     paper.on("link:mouseenter", (linkView: dia.LinkView) => {
       showLinkTools(linkView);
