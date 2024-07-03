@@ -272,7 +272,7 @@ const App = () => {
                   ],
                 },
                 key: {
-                  label: "Key",
+                  label: "Primary Key",
                   type: "toggle",
                 },
               },
@@ -293,7 +293,7 @@ const App = () => {
         content: inspector.el,
         buttons: [
           {
-            content: "Remove",
+            content: "Delete",
             action: "remove",
             position: "left",
           },
