@@ -1,13 +1,33 @@
+import { dia, format, linkTools, shapes, ui, util } from "@joint/plus";
 import { useEffect, useRef } from "react";
-import { dia, ui, shapes, linkTools } from "@joint/plus";
-import { routerNamespace } from "./joint-js/routers";
-import { anchorNamespace } from "./joint-js/anchors";
-import { Link, Table } from "./joint-js/shapes";
-import { TableHighlighter } from "./joint-js/highlighters";
 import "./App.scss";
+import { anchorNamespace } from "./joint-js/anchors";
+import { TableHighlighter } from "./joint-js/highlighters";
+import { routerNamespace } from "./joint-js/routers";
+import { Link, Table } from "./joint-js/shapes";
 
 const App = () => {
   const canvas = useRef<HTMLDivElement>(null);
+  const paperRef = useRef<dia.Paper | null>(null);
+  const backgroundColor = "#F3F7F6";
+  const exportOptions = {
+    padding: 20,
+    useComputedStyles: false,
+    backgroundColor,
+    size: "2x",
+  };
+
+  const handleExport = () => {
+    if (paperRef.current) {
+      format.toPNG(
+        paperRef.current,
+        (dataUri) => {
+          util.downloadDataUri(dataUri, "diagram.png");
+        },
+        exportOptions
+      );
+    }
+  };
 
   useEffect(() => {
     const graph = new dia.Graph({}, { cellNamespace: shapes });
@@ -43,6 +63,8 @@ const App = () => {
         return srcMagnet !== tgtMagnet;
       },
     });
+
+    paperRef.current = paper;
 
     const scroller = new ui.PaperScroller({
       paper,
@@ -347,6 +369,19 @@ const App = () => {
   return (
     <div id="app">
       <div className="canvas" ref={canvas} />
+      <div className="export-btn">
+        <button className="Btn" onClick={handleExport}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            className="svgIcon"
+            viewBox="0 0 384 512"
+          >
+            <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+          </svg>
+          <span className="icon2"></span>
+        </button>
+      </div>
     </div>
   );
 };
